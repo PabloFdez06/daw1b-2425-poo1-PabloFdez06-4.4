@@ -1,22 +1,25 @@
 class Coche(var color: String?,
-            private val marca: String?,
-            private val modelo: String?,
+            marca: String?,
+            modelo: String?,
             private val numCaballos: Int?,
             private val numPuertas: Int?,
             private val matricula: String?) {
 
 
-/*    var matricula: String = matricula // se puede hacer o con un setter o con require, preguntar cual seria mas correcta
+/*    var matricula: String? = matricula
         set(value){
-            require(value.length == 7){"La matrícula debe tener 7 caracteres."}
+            require(value?.length == 7){"La matrícula debe tener 7 caracteres."}
             field = value
         }*/
 
-    val marcaMayusc: String
-        get() = marca!!.replaceFirstChar { it.uppercase() }
+    private var marca: String?
+        get() = field?.replaceFirstChar { it.uppercase() } ?: ""
+        private set
 
-    val modeloMayusc: String
-        get() = modelo!!.replaceFirstChar { it.uppercase() }
+
+    private var modelo: String?
+        get() = field?.replaceFirstChar { it.uppercase() }?: ""
+        private set
 
     init {
         require(!color.isNullOrEmpty()){"El color no puede ser nulo!"}
@@ -27,9 +30,13 @@ class Coche(var color: String?,
         require(!matricula.isNullOrEmpty() && matricula.length == 7){"La matrícula debe tener 7 caracteres!"}
         require(numCaballos in 70..700){"El número de caballos debe estár entre 70 y 700 caballos"}
         require(numPuertas in 3..5){"El número de puertas debe estár entre 3 y 5"}
+        this.marca = marca
+        this.modelo = modelo
     }
 
+
+
     override fun toString(): String {
-        return "MARCA: $marcaMayusc, MODELO: $modeloMayusc, COLOR: $color, CABALLOS: $numCaballos HP, PUERTAS: $numPuertas, MATRÍCULA: $matricula."
+        return "MARCA: ${marca}, MODELO: ${modelo}, COLOR: ${color}, CABALLOS: ${numCaballos} HP, PUERTAS: ${numPuertas}, MATRÍCULA: ${matricula}."
     }
 }

@@ -7,12 +7,16 @@ fun main() {
         println("ERROR: ${e.message}")
     }
 
+    println("-----------------------")
+
     try {
         val coche2 = Coche("Azul","Mercedes", "Nissan cascai", 67, 4, "A48JRSP")
         println(coche2) // Lanza excepción correctamente cuando el número de caballos es inferior a 70 o superior a 700*/
     }catch (e: IllegalArgumentException) {
         println("ERROR: ${e.message}")
     }
+
+    println("-----------------------")
 
     try {
         val coche3 = Coche("Rojo","BMW", "X4", 80, 2, "A48JRSP")
@@ -21,6 +25,8 @@ fun main() {
         println("ERROR: ${e.message}")
     }
 
+    println("-----------------------")
+
     try {
         val coche4 = Coche("Verde","Audi", "RS7", 80, 2, "A48JR")
         println(coche4) // Lanza excepción correctamente cuando la matrícula no contiene 7 caracteres*/
@@ -28,10 +34,30 @@ fun main() {
         println("ERROR: ${e.message}")
     }
 
+    println("-----------------------")
+
     try {
-        val coche4 = Coche("Verde","audi", "r8", 458, 3, "A4890JR")
-        println(coche4) // FUNCIONA CORRECTAMENTE, Y COMPROBANDO LA FUNCIONALIDAD DE MARCAMAYUSC Y MODELOMAYUSC*/
+        val coche5 = Coche("Verde","audi", "r8", 458, 3, "A4890JR")
+        println(coche5) // FUNCIONA CORRECTAMENTE, Y COMPROBANDO LA FUNCIONALIDAD DE MARCAMAYUSC Y MODELOMAYUSC
+
     }catch (e: IllegalArgumentException) {
         println("ERROR: ${e.message}")
     }
+
+    println("-----------------------")
+
+    val coche6 = try { // Así coche 6 es accesible desde fuera, si no, no lo seria.
+        Coche("Verde","audi", "r8", 458, 3, "A4890JR")
+
+    }catch (e: IllegalArgumentException) {
+        println("ERROR: ${e.message}")
+        null
+    }
+
+    println(coche6?: "No existe") // FUNCIONA CORRECTAMENTE, Y COMPROBANDO LA FUNCIONALIDAD DE MARCAMAYUSC Y MODELOMAYUSC
+
+
+
+
+
 }
